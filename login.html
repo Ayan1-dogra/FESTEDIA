@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #1e2a3a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      width: 350px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: #002244;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .link {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .link a {
+      color: #002244;
+      text-decoration: none;
+    }
+
+    /* Alert Styles */
+    .alert {
+      background-color: #ff4d4d;
+      color: white;
+      padding: 12px 20px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      text-align: center;
+      font-weight: bold;
+      animation: slideDown 0.5s ease;
+      display: none;
+    }
+    .alert.success {
+      background-color: #28a745;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Login</h2>
+    <div id="alertBox" class="alert"></div>
+
+    <form action="login.php" method="POST">
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="link">
+      Don’t have an account? <a href="signup.html">Sign up</a>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    const success = urlParams.get('success');
+    const alertBox = document.getElementById('alertBox');
+
+    if (error) {
+      alertBox.textContent = decodeURIComponent(error.replace(/\+/g, ' '));
+      alertBox.classList.remove('success');
+      alertBox.style.display = 'block';
+    } else if (success) {
+      alertBox.textContent = decodeURIComponent(success.replace(/\+/g, ' '));
+      alertBox.classList.add('success');
+      alertBox.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
